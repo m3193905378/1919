@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>诗词问答游戏</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        #question {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin: 20px 0;
+        }
+        #userInput {
+            width: 300px;
+            padding: 10px;
+            font-size: 1.1em;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div style="position: relative; min-height: 100vh;">
+        <div style="position: fixed; left: 0; top: 0; bottom: 0; width: 260px; overflow: hidden;">
+            <img src="sushi.jpg" alt="苏轼画像" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0 12px 12px 0; box-shadow: 6px 0 12px rgba(0,0,0,0.3);">
+        </div>
+
+        <div style="max-width: 600px; padding: 20px; position: fixed; left: 260px; top: 50%; transform: translateY(-50%); z-index: 1;">
+            <div id="question"></div>
+        </div>
+
+        <div style="position: fixed; right: 260px; top: 50%; transform: translateY(-50%); width: 300px;">
+            <input type="text" id="userInput" placeholder="请输入完整诗句" style="width: 70%; padding: 12px; margin-bottom: 15px;">
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button onclick="checkAnswer()" style="padding: 12px 30px;">提交答案</button>
+                <button onclick="newQuestion()" style="padding: 12px 30px;">换一题</button>
+            </div>
+        </div>
+
+        <div style="position: fixed; right: 0; top: 0; bottom: 0; width: 260px; overflow: hidden;">
+            <img src="luyou.jpg" alt="陆游画像" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px 0 0 12px; box-shadow: -6px 0 12px rgba(0,0,0,0.3);">
+        </div>
+    </div>
+
+    <script>
+        // 内置题库（问题|答案）
+        const questionBank = [
+            { question: "但愿人长久，__________。", answer: "千里共婵娟" },
+            { question: "人生如梦，__________。", answer: "一尊还酹江月" },
+            { question: "回首向来潇洒处。归去，__________。", answer: "也无风雨也无晴" },
+            { question: "纸上得来终觉浅，__________。", answer: "绝知此事要躬行" },
+            { question: "夜阑卧听风吹雨，__________。", answer: "铁马冰河入梦来" }
+        ];
+
+        let currentQuestion;
+
+        // 初始化题目
+        function init() {
+            currentQuestion = questionBank[Math.floor(Math.random() * questionBank.length)];
+            document.getElementById('question').textContent = currentQuestion.question;
+            document.getElementById('userInput').value = '';
+        }
+
+        // 检查答案
+        function checkAnswer() {
+            const userAnswer = document.getElementById('userInput').value.trim();
+            const result = userAnswer === currentQuestion.answer ? 
+                '✅ 回答正确！' : '❌ 正确答案：' + currentQuestion.answer;
+            alert(result);
+            
+            if (userAnswer === currentQuestion.answer) {
+                newQuestion();
+            }
+        }
+
+        // 换新题目
+        function newQuestion() {
+            init();
+        }
+
+        // 页面加载时初始化
+        window.onload = init;
+    </script>
+</body>
+</html>
