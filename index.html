@@ -2,55 +2,67 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>诗词问答游戏</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
         .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 15px;
             text-align: center;
         }
         #question {
-            font-size: 1.2em;
+            font-size: 1.1em;
             color: #2c3e50;
-            margin: 20px 0;
+            margin: 15px 0;
         }
         #userInput {
-            width: 300px;
+            width: 100%;
             padding: 10px;
-            font-size: 1.1em;
+            font-size: 1em;
+            max-width: 300px;
         }
         button {
             background: #3498db;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            margin: 10px;
+            margin: 8px;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            #question {
+                font-size: 1em;
+            }
+            #userInput {
+                max-width: 100%;
+            }
+            button {
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
 <body>
-    <div style="position: relative; min-height: 100vh;">
-        <div style="position: fixed; left: 0; top: 0; bottom: 0; width: 260px; overflow: hidden;">
-            <img src="sushi.jpg" alt="苏轼画像" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0 12px 12px 0; box-shadow: 6px 0 12px rgba(0,0,0,0.3);">
+    <div class="container">
+        <div id="question"></div>
+        <input type="text" id="userInput" placeholder="请输入完整诗句">
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <button onclick="checkAnswer()">提交答案</button>
+            <button onclick="newQuestion()">换一题</button>
         </div>
-
-        <div style="max-width: 600px; padding: 20px; position: fixed; left: 260px; top: 50%; transform: translateY(-50%); z-index: 1;">
-            <div id="question"></div>
-        </div>
-
-        <div style="position: fixed; right: 260px; top: 50%; transform: translateY(-50%); width: 300px;">
-            <input type="text" id="userInput" placeholder="请输入完整诗句" style="width: 70%; padding: 12px; margin-bottom: 15px;">
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <button onclick="checkAnswer()" style="padding: 12px 30px;">提交答案</button>
-                <button onclick="newQuestion()" style="padding: 12px 30px;">换一题</button>
-            </div>
-        </div>
-
-        <div style="position: fixed; right: 0; top: 0; bottom: 0; width: 260px; overflow: hidden;">
-            <img src="luyou.jpg" alt="陆游画像" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px 0 0 12px; box-shadow: -6px 0 12px rgba(0,0,0,0.3);">
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <img src="sushi.jpg" alt="苏轼画像" style="width: 48%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+            <img src="luyou.jpg" alt="陆游画像" style="width: 48%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
         </div>
     </div>
 
